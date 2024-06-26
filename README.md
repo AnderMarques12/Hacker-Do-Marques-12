@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.2/font/bootstrap-icons.min.css">
     <style>
         body {
-            background-color: #1a1a2e;
-            color: white;
+            background-color: #000000;
+            color: #ffffff;
             font-family: Arial, sans-serif;
             margin: 0;
             display: flex;
@@ -56,18 +56,18 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: rgba(26, 26, 46, 0.9);
+            background-color: rgba(38, 38, 78, 0.9);
             width: 90%;
             max-width: 400px;
             border-radius: 10px;
-            border: 2px solid #f70000;
+            border: 2px solid #ff3333;
             z-index: 9999;
             padding: 16px;
             box-sizing: border-box;
             display: flex;
             justify-content: space-around;
             pointer-events: none;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            box-shadow: 0 0 20px rgba(255, 51, 51, 0.8);
         }
 
         .context-options.show {
@@ -84,14 +84,14 @@
         .square {
             width: 50px;
             height: 50px;
-            background: linear-gradient(145deg, #232344, #1a1a2e);
+            background: linear-gradient(145deg, #343466, #2a2a4e);
             margin: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 5px;
-            border: 2px solid #ff0000;
-            box-shadow: 0 1px 5px rgba(255, 0, 0, 0.4);
+            border: 2px solid #ff3333;
+            box-shadow: 0 1px 5px rgba(255, 51, 51, 0.4);
             position: relative;
             pointer-events: none;
             transition: transform 0.2s, box-shadow 0.2s;
@@ -99,8 +99,8 @@
 
         .square:hover {
             transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(255, 77, 77, 0.6);
-            border: 2px solid #00ff99;
+            box-shadow: 0 8px 16px rgba(255, 51, 51, 0.6);
+            border: 2px solid #00cc66;
         }
 
         .square img {
@@ -110,7 +110,7 @@
         }
 
         .identify-option {
-            background-color: #ff0000;
+            background-color: #ff3333;
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -125,14 +125,14 @@
         }
 
         .identify-option:hover {
-            background-color: #ff9999;
+            background-color: #ff6666;
         }
 
         .close-button {
             position: absolute;
             top: -9%;
             right: -4%;
-            background-color: #fc0000;
+            background-color: #cc0000;
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -150,7 +150,7 @@
         }
 
         .realistic-button {
-            background-color: #ff0000;
+            background-color: #ff3333;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -163,7 +163,7 @@
         }
 
         .realistic-button:hover {
-            background-color: #ff9999;
+            background-color: #ff6666;
         }
 
         .loading {
@@ -172,7 +172,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 24px;
-            color: #ff0000;
+            color: #ff3333;
             display: none;
             flex-direction: column;
             align-items: center;
@@ -186,7 +186,7 @@
         .progress-bar {
             width: 100px;
             height: 10px;
-            background-color: hsl(0, 100%, 50%);
+            background-color: #ff3333;
             border-radius: 5px;
             overflow: hidden;
             position: relative;
@@ -195,7 +195,7 @@
         .progress-bar-inner {
             width: 0;
             height: 100%;
-            background-color: #00ff99;
+            background-color: #00cc66;
             position: absolute;
             left: 0;
             top: 0;
@@ -226,7 +226,7 @@
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            background: linear-gradient(145deg, #232344, #1a1a2e); /* Ajuste do gradiente de fundo */
+            background: linear-gradient(145deg, #343466, #2a2a4e); /* Ajuste do gradiente de fundo */
         }
 
         .user-profile img {
@@ -247,7 +247,7 @@
         }
 
         .sidenav-nav li {
-            border-bottom: 1px solid #2a2a2a;
+            border-bottom: 1px solid #3a3a3a;
         }
 
         .sidenav-nav a {
@@ -261,7 +261,7 @@
         }
 
         .sidenav-nav a:hover {
-            background-color: #232344;
+            background-color: #343466;
         }
 
         .sidenav-nav i {
@@ -330,7 +330,7 @@
                 </div>
                 <ul class="sidenav-nav ps-0">
                     <li><a href="AnderMarques12.github.io"><i class="bi bi-house-door"></i>Home</a></li>
-                    <li><a href="#"><i class="bi bi-instagram"></i>Instagram</a></li>
+                    <li><a href="https://www.instagram.com/marquez.mines/?hl=pt-br"><i class="bi bi-instagram"></i>Instagram</a></li>
                     <li><a href="#"><i class="bi bi-telegram"></i>Telegram</a></li>
                     <li><a href="AnderMarques12.github.io"><i class="bi bi-box-arrow-right"></i>Sair</a></li>
                 </ul>
