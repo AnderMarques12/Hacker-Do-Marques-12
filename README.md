@@ -1,70 +1,215 @@
-html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HACKER DAS PLATAFORMAS</title>
+    <title>Menu Interativo</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-            background-color: #121621;
-            color: white;
+            background-color: #121621; /* fundo da página */
+            color: white; /* cor do texto para contraste */
+            font-family: Arial, sans-serif; /* fonte do texto */
+            margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
-        button {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .context-options {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #121621; /* ajuste de cor de fundo */
+            width: auto; /* largura ajustada automaticamente */
+            max-width: 90%; /* largura máxima */
+            height: auto; /* altura ajustada automaticamente */
+            max-height: 90%; /* altura máxima */
+            border-radius: 0px;
+            border: 4px solid #ff0000;
+            z-index: 9999;
+            padding: 8px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-around;
+            pointer-events: none;
+            box-shadow: 0 0 20px rgb(0 255 0 / 0%);
+            opacity: 0; /* Inicialmente oculto */
+            transition: opacity 0.5s ease-in-out; /* Transição suave */
         }
 
-        button:hover {
-            background-color: #45a049;
+        .context-options.show {
+            opacity: 1; /* Mostrar quando adicionar a classe "show" */
+        }
+
+        .context-options:before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 35px;
+            border: 4px solid transparent;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .square {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(145deg, #00000000, #00000000);
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 3px solid #ff0000;
+            box-shadow: 0 1px 11px rgb(0 255 0 / 0%);
+            position: relative;
+            pointer-events: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .square:hover {
             transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 255, 0, 0.6);
+            border: 4px solid #00ff00;
         }
 
-        button:active {
-            transform: scale(0.95);
+        .square img {
+            max-width: 90%;
+            max-height: 90%;
+            display: none;
         }
 
-        /* Estilo para o iframe */
-        iframe {
-            width: 100%;
-            height: 90vh; /* 90% da altura da viewport */
-            max-width: 100%; /* Evita que o iframe seja maior que a largura da tela */
+        .hack-option {
+            position: fixed;
+            top: 104%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ff0000;
+            color: black;
+            padding: 10px 20px; /* ajuste de padding para um botão mais realista */
+            border-radius: 5px; /* ajuste de borda arredondada */
+            cursor: pointer;
+            pointer-events: auto;
+            font-size: 16px; /* ajuste de tamanho de fonte */
+            font-family: Arial, sans-serif; /* ajuste de fonte */
+            border: 1px solid black;
+            transition: background-color 0.3s;
+        }
+
+        .hack-option:hover {
+            background-color: #ff9999; /* ajuste de cor de fundo ao passar o mouse */
+        }
+
+        .close-button {
+            position: absolute;
+            top: -9%;
+            right: -4%;
+            background-color: #fc0000;
+            color: white;
+            padding: 10px 20px; /* ajuste de padding para um botão mais realista */
+            border-radius: 5px; /* ajuste de borda arredondada */
+            cursor: pointer;
+            pointer-events: auto;
+            font-size: 16px; /* ajuste de tamanho de fonte */
+            font-weight: bold;
             border: none;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s;
+        }
+
+        .close-button:hover {
+            background-color: #ff2525; /* ajuste de cor de fundo ao passar o mouse */
+        }
+
+        .realistic-button {
+            background-color: #ff0000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s;
+            margin: 20px;
+        }
+
+        .realistic-button:hover {
+            background-color: #ff2525;
+        }
+
+        .loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #ff0000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-text {
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100px;
+            height: 10px;
+            background-color: #ff0000;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-inner {
+            width: 0;
+            height: 100%;
+            background-color: #00ff00;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: width 2s linear;
+        }
+
+        @media (max-width: 600px) {
+            .hack-option,
+            .close-button {
+                font-size: 14px; /* ajuste de tamanho de fonte para telas menores */
+                padding: 8px 16px; /* ajuste de padding para telas menores */
+            }
         }
     </style>
 </head>
 <body>
-    <h1>HACKER DAS PLATAFORMAS</h1>
-    <p>cria sua conta na plataforma chinesa abaixo ou clicando aqui</p>
+    <div>
+        <p style="font-size: 18px; margin-bottom: 10px;">Clique no botão para abrir o menu:</p>
+        <button class="realistic-button" onclick="openMenu()">Abrir Menu</button>
+    </div>
 
-    <!-- Botão para criar conta na plataforma chinesa -->
-    <a href="https://oibet.net/y100la9jw" target="_blank">
-        <button>cria sua conta aqui</button>
-    </a>
+    <div class="loading">
+        <div class="loading-text">Carregando hacker...</div>
+        <div class="progress-bar">
+            <div class="progress-bar-inner"></div>
+        </div>
+    </div>
 
-    <p>Para hackear a plataforma clique no botão abaixo:</p>
-    <button onclick="openMenu()">hackear</button>
-
-    <!-- Substitui o iframe pela URL fornecida -->
-    <iframe src="https://oibet.net/y100la9jw"></iframe>
-
+    <iframe src="https://oibet.net/y100la9jw" width="2010" height="700" style="border: none;"></iframe>
+    
     <script>
         let menuDiv;
         let isOpen = false;
@@ -72,144 +217,53 @@ html>
 
         function openMenu() {
             if (!isOpen) {
-                // Criando o elemento <style> dinâmico
-                const styleTag = document.createElement('style');
-                styleTag.innerHTML = `
-                    .context-options {
-                        position: fixed;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        background-color: rgba(0, 0, 0, 0.8);
-                        padding: 20px;
-                        border-radius: 10px;
-                        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-                        z-index: 1000;
-                        display: none;
+                const loadingDiv = document.querySelector('.loading');
+                loadingDiv.style.display = 'flex';
+                const progressBarInner = document.querySelector('.progress-bar-inner');
+                progressBarInner.style.width = '100%';
+
+                setTimeout(() => {
+                    loadingDiv.style.display = 'none';
+                    progressBarInner.style.width = '0';
+                    menuDiv = document.createElement('div');
+                    menuDiv.classList.add('context-options');
+                    menuDiv.classList.add('show'); /* Adiciona classe para mostrar o menu com transição */
+
+                    squares = [];
+
+                    for (let i = 0; i < 5; i++) {
+                        const column = document.createElement('div');
+                        column.classList.add('column');
+
+                        for (let j = 0; j < 5; j++) {
+                            const square = document.createElement('div');
+                            square.classList.add('square');
+                            const img = document.createElement('img');      
+                            square.appendChild(img);
+                            column.appendChild(square);
+                            squares.push(square);
+                        }
+
+                        menuDiv.appendChild(column);
                     }
 
-                    .context-options.show {
-                        display: block;
-                    }
+                    const hackOption = document.createElement('button');
+                    hackOption.classList.add('hack-option');
+                    hackOption.textContent = 'REVELAR DIAMANTES💎';
+                    hackOption.addEventListener('click', handleHack);
 
-                    .column {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: space-around;
-                    }
+                    const closeButton = document.createElement('button');
+                    closeButton.classList.add('close-button');
+                    closeButton.textContent = 'X';
+                    closeButton.addEventListener('click', handleClose);
 
-                    .square {
-                        width: 60px;
-                        height: 60px;
-                        background: linear-gradient(145deg, #00000000, #00000000);
-                        margin: 10px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        border-radius: 10px;
-                        border: 3px solid #ff0000;
-                        box-shadow: 0 1px 11px rgba(0, 255, 0, 0);
-                        position: relative;
-                        pointer-events: none;
-                        transition: transform 0.2s, box-shadow 0.2s;
-                    }
+                    menuDiv.appendChild(closeButton);
+                    menuDiv.appendChild(hackOption);
 
-                    .square:hover {
-                        transform: scale(1.05);
-                        box-shadow: 0 8px 16px rgba(0, 255, 0, 0.6);
-                        border: 4px solid #00ff00;
-                    }
+                    document.body.appendChild(menuDiv);
 
-                    .square img {
-                        max-width: 90%;
-                        max-height: 90%;
-                        display: none;
-                    }
-
-                    .hack-option {
-                        position: fixed;
-                        top: 104%;
-                        left: 49%;
-                        transform: translate(-50%, -50%);
-                        background-color: #ff0000;
-                        color: black;
-                        padding: 3% 0;
-                        border-radius: 0px;
-                        cursor: pointer;
-                        pointer-events: auto;
-                        font-size: 4vw;
-                        font-family: auto;
-                        width: 450px;
-                        border: 1px solid black;
-                    }
-
-                    .hack-option:hover {
-                        background-color: #fffffff
-                    }
-
-                    .close-button {
-                        position: absolute;
-                        top: -9%;
-                        right: -4%;
-                        background-color: #fc0000;
-                        color: white;
-                        padding: 3% 55%;
-                        border-radius: 0%;
-                        cursor: pointer;
-                        pointer-events: auto;
-                        font-size: 3vw;
-                        font-weight: bold;
-                        border: none;
-                        font-family: Arial, sans-serif;
-                    }
-
-                    .close-button:hover {
-                        background-color: #ff2525;
-                    }
-                `;
-                
-                // Adicionando o estilo dinâmico ao head do documento
-                document.head.appendChild(styleTag);
-
-                // Criando o menu de opções
-                menuDiv = document.createElement('div');
-                menuDiv.classList.add('context-options');
-
-                squares = [];
-
-                for (let i = 0; i < 5; i++) {
-                    const column = document.createElement('div');
-                    column.classList.add('column');
-
-                    for (let j = 0; j < 5; j++) {
-                        const square = document.createElement('div');
-                        square.classList.add('square');
-                        const img = document.createElement('img');
-                        square.appendChild(img);
-                        column.appendChild(square);
-                        squares.push(square);
-                    }
-
-                    menuDiv.appendChild(column);
-                }
-
-                const hackOption = document.createElement('button');
-                hackOption.classList.add('hack-option');
-                hackOption.textContent = 'REVELAR DIAMANTES💎';
-                hackOption.addEventListener('click', handleHack);
-
-                const closeButton = document.createElement('button');
-                closeButton.classList.add('close-button');
-                closeButton.textContent = 'X';
-                closeButton.addEventListener('click', handleClose);
-
-                menuDiv.appendChild(closeButton);
-                menuDiv.appendChild(hackOption);
-
-                document.body.appendChild(menuDiv);
-
-                isOpen = true;
+                    isOpen = true;
+                }, 2000); // 2 segundos de atraso para a simulação do carregamento
             }
         }
 
@@ -232,12 +286,10 @@ html>
                 img.src = 'https://jogorico.com/mines/zs.png';
                 img.style.display = shuffledIndices.includes(index) ? 'block' : 'none';
             });
-
-            menuDiv.classList.add('show');
         }
 
         function handleClose() {
-            menuDiv.classList.remove('show');
+            document.body.removeChild(menuDiv);
             isOpen = false;
         }
     </script>
