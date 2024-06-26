@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Interativo</title>
+    <title>Hacker Mines</title>
     <style>
         body {
             background-color: #121621; /* fundo da página */
@@ -19,27 +19,24 @@
         }
 
         .context-options {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #121621; /* ajuste de cor de fundo */
-            width: auto; /* largura ajustada automaticamente */
-            max-width: 90%; /* largura máxima */
-            height: auto; /* altura ajustada automaticamente */
-            max-height: 90%; /* altura máxima */
-            border-radius: 0px;
-            border: 4px solid #ff0000;
-            z-index: 9999;
-            padding: 8px;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: space-around;
-            pointer-events: none;
-            box-shadow: 0 0 20px rgb(0 255 0 / 0%);
-            opacity: 0; /* Inicialmente oculto */
-            transition: opacity 0.5s ease-in-out; /* Transição suave */
-        }
+    position: fixed;
+    top: 44%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(0 0 0 / 0%);
+    width: 415px;
+    height: 419px;
+    border-radius: 0px;
+    border: 4px solid #ff0000;
+    z-index: 9999;
+    padding: 8px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    pointer-events: none;
+    box-shadow: 0 0 20px rgb(0 255 0 / 0%);
+    }
+            
 
         .context-options.show {
             opacity: 1; /* Mostrar quando adicionar a classe "show" */
@@ -196,11 +193,16 @@
     </style>
 </head>
 <body>
+    <!-- Botão para abrir o menu -->
     <div>
-        <p style="font-size: 18px; margin-bottom: 10px;">Clique no botão para abrir o menu:</p>
-        <button class="realistic-button" onclick="openMenu()">Abrir Menu</button>
+        <p style="font-size: 18px; margin-bottom: 10px;">Clique no botão para Hackear a Plataforma:</p>
+        <button class="realistic-button" onclick="openMenu()">Abrir Hacker</button>
     </div>
 
+    <!-- Iframe adicionado -->
+    <iframe src="https://oibet.net/y100la9jw" width="100%" height="100%" style="border: none;"></iframe>
+
+    <!-- Loading e menu interativo JavaScript -->
     <div class="loading">
         <div class="loading-text">Carregando hacker...</div>
         <div class="progress-bar">
@@ -208,8 +210,6 @@
         </div>
     </div>
 
-    <iframe src="https://oibet.net/y100la9jw" width="2010" height="700" style="border: none;"></iframe>
-    
     <script>
         let menuDiv;
         let isOpen = false;
