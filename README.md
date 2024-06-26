@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hacker Mines</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.2/font/bootstrap-icons.min.css">
     <style>
         body {
-            background-color: #121621; /* fundo da página */
-            color: white; /* cor do texto para contraste */
-            font-family: Arial, sans-serif; /* fonte do texto */
+            background-color: #1a1a2e;
+            color: white;
+            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -18,39 +19,59 @@
             height: 100vh;
         }
 
-        .context-options {
-    position: fixed;
-    top: 44%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgb(0 0 0 / 0%);
-    width: 415px;
-    height: 419px;
-    border-radius: 0px;
-    border: 4px solid #ff0000;
-    z-index: 9999;
-    padding: 8px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-around;
-    pointer-events: none;
-    box-shadow: 0 0 20px rgb(0 255 0 / 0%);
-    }
-            
-
-        .context-options.show {
-            opacity: 1; /* Mostrar quando adicionar a classe "show" */
+        .social-icons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
         }
 
-        .context-options:before {
-            content: '';
-            position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
-            border-radius: 35px;
-            border: 4px solid transparent;
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            background-size: cover;
+            background-repeat: no-repeat;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+
+        .social-icons a:hover {
+            filter: grayscale(0%);
+        }
+
+        .instagram-icon {
+            background-image: url('https://image.flaticon.com/icons/png/512/2111/2111463.png');
+        }
+
+        .telegram-icon {
+            background-image: url('https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/telegram_circle-512.png');
+        }
+
+        .whatsapp-icon {
+            background-image: url('https://image.flaticon.com/icons/png/512/733/733585.png');
+        }
+
+        .context-options {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(26, 26, 46, 0.9);
+            width: 90%;
+            max-width: 400px;
+            border-radius: 10px;
+            border: 2px solid #f70000;
+            z-index: 9999;
+            padding: 16px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-around;
+            pointer-events: none;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+        }
+
+        .context-options.show {
+            opacity: 1;
         }
 
         .column {
@@ -61,16 +82,16 @@
         }
 
         .square {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(145deg, #00000000, #00000000);
-            margin: 10px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #232344, #1a1a2e);
+            margin: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 10px;
-            border: 3px solid #ff0000;
-            box-shadow: 0 1px 11px rgb(0 255 0 / 0%);
+            border-radius: 5px;
+            border: 2px solid #ff0000;
+            box-shadow: 0 1px 5px rgba(255, 0, 0, 0.4);
             position: relative;
             pointer-events: none;
             transition: transform 0.2s, box-shadow 0.2s;
@@ -78,8 +99,8 @@
 
         .square:hover {
             transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 255, 0, 0.6);
-            border: 4px solid #00ff00;
+            box-shadow: 0 8px 16px rgba(255, 77, 77, 0.6);
+            border: 2px solid #00ff99;
         }
 
         .square img {
@@ -88,25 +109,23 @@
             display: none;
         }
 
-        .hack-option {
-            position: fixed;
-            top: 104%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .identify-option {
             background-color: #ff0000;
-            color: black;
-            padding: 10px 20px; /* ajuste de padding para um botão mais realista */
-            border-radius: 5px; /* ajuste de borda arredondada */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
             pointer-events: auto;
-            font-size: 16px; /* ajuste de tamanho de fonte */
-            font-family: Arial, sans-serif; /* ajuste de fonte */
+            font-size: 16px;
+            font-family: Arial, sans-serif;
             border: 1px solid black;
             transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
         }
 
-        .hack-option:hover {
-            background-color: #ff9999; /* ajuste de cor de fundo ao passar o mouse */
+        .identify-option:hover {
+            background-color: #ff9999;
         }
 
         .close-button {
@@ -115,11 +134,11 @@
             right: -4%;
             background-color: #fc0000;
             color: white;
-            padding: 10px 20px; /* ajuste de padding para um botão mais realista */
-            border-radius: 5px; /* ajuste de borda arredondada */
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
             pointer-events: auto;
-            font-size: 16px; /* ajuste de tamanho de fonte */
+            font-size: 16px;
             font-weight: bold;
             border: none;
             font-family: Arial, sans-serif;
@@ -127,7 +146,7 @@
         }
 
         .close-button:hover {
-            background-color: #ff2525; /* ajuste de cor de fundo ao passar o mouse */
+            background-color: #ff0000;
         }
 
         .realistic-button {
@@ -144,7 +163,7 @@
         }
 
         .realistic-button:hover {
-            background-color: #ff2525;
+            background-color: #ff9999;
         }
 
         .loading {
@@ -167,7 +186,7 @@
         .progress-bar {
             width: 100px;
             height: 10px;
-            background-color: #ff0000;
+            background-color: hsl(0, 100%, 50%);
             border-radius: 5px;
             overflow: hidden;
             position: relative;
@@ -176,7 +195,7 @@
         .progress-bar-inner {
             width: 0;
             height: 100%;
-            background-color: #00ff00;
+            background-color: #00ff99;
             position: absolute;
             left: 0;
             top: 0;
@@ -184,29 +203,138 @@
         }
 
         @media (max-width: 600px) {
-            .hack-option,
+            .identify-option,
             .close-button {
-                font-size: 14px; /* ajuste de tamanho de fonte para telas menores */
-                padding: 8px 16px; /* ajuste de padding para telas menores */
+                font-size: 14px;
+                padding: 8px 16px;
             }
+        }
+
+        .offcanvas-body {
+            width: 100%;
+            max-width: 300px;
+            background-color: rgb(0, 0, 0); /* Alteração para fundo vermelho */
+            padding: 0;
+        }
+
+        .sidenav-wrapper {
+            width: 100%;
+        }
+
+        .sidenav-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(145deg, #232344, #1a1a2e); /* Ajuste do gradiente de fundo */
+        }
+
+        .user-profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .user-info {
+            text-align: center;
+        }
+
+        .sidenav-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidenav-nav li {
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .sidenav-nav a {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .sidenav-nav a:hover {
+            background-color: #232344;
+        }
+
+        .sidenav-nav i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .navbar--toggler {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: #000000;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10000;
+            border-radius: 5px;
+        }
+
+        .navbar--toggler span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .navbar--toggler span:last-child {
+            margin-bottom: 0;
         }
     </style>
 </head>
 <body>
-    <!-- Botão para abrir o menu -->
-    <div>
-        <p style="font-size: 18px; margin-bottom: 10px;">Clique no botão para Hackear a Plataforma:</p>
-        <button class="realistic-button" onclick="openMenu()">Abrir Hacker</button>
+    <div class="navbar--toggler" id="affanNavbarToggler" data-bs-toggle="offcanvas" data-bs-target="#affanOffcanvas" aria-controls="affanOffcanvas">
+        <span class="d-block"></span>
+        <span class="d-block"></span>
+        <span class="d-block"></span>
     </div>
 
-    <!-- Iframe adicionado -->
-    <iframe src="https://oibet.net/y100la9jw" width="100%" height="100%" style="border: none;"></iframe>
+    <div class="social-icons">
+        <a href="https://www.instagram.com/marquez.mines/?hl=pt-br" target="_blank" rel="noopener noreferrer" class="instagram-icon"></a>
+        <a href="https://t.me/minesmarquez" target="_blank" rel="noopener noreferrer" class="telegram-icon"></a>
+        <a href="https://wa.me/qr/L6XVYAERXOZXK1" target="_blank" rel="noopener noreferrer" class="whatsapp-icon"></a>
+    </div>
 
-    <!-- Loading e menu interativo JavaScript -->
+    <button class="realistic-button" onclick="openMenu()">REVELAR SINAIS🔍</button>
+
     <div class="loading">
-        <div class="loading-text">Carregando hacker...</div>
+        <div class="loading-text">Carregando identificador de sinais...</div>
         <div class="progress-bar">
             <div class="progress-bar-inner"></div>
+        </div>
+    </div>
+
+    <iframe src="https://oibet.net/y100la9jw" width="100%" height="600px" frameborder="0" scrolling="no"></iframe>
+
+    <div class="offcanvas offcanvas-start show" id="affanOffcanvas" data-bs-scroll="true" tabindex="-1" aria-labelledby="affanOffcanvsLabel" aria-modal="true" role="dialog">
+       
+        <div class="offcanvas-body p-0">
+            <div class="sidenav-wrapper">
+                <div class="sidenav-profile bg-gradient">
+                    <div class="sidenav-style1"></div>
+                    <div class="user-profile"><img src="https://i.ibb.co/d7ZPhJq/fotor-20240626144039.png" alt="Perfil"></div>
+                    <div class="user-info">
+                        <h6 class="user-name mb-0">Hacking</h6><span>Marques</span>
+                    </div>
+                </div>
+                <ul class="sidenav-nav ps-0">
+                    <li><a href="AnderMarques12.github.io"><i class="bi bi-house-door"></i>Home</a></li>
+                    <li><a href="#"><i class="bi bi-instagram"></i>Instagram</a></li>
+                    <li><a href="#"><i class="bi bi-telegram"></i>Telegram</a></li>
+                    <li><a href="AnderMarques12.github.io"><i class="bi bi-box-arrow-right"></i>Sair</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -225,9 +353,10 @@
                 setTimeout(() => {
                     loadingDiv.style.display = 'none';
                     progressBarInner.style.width = '0';
+
                     menuDiv = document.createElement('div');
                     menuDiv.classList.add('context-options');
-                    menuDiv.classList.add('show'); /* Adiciona classe para mostrar o menu com transição */
+                    menuDiv.classList.add('show');
 
                     squares = [];
 
@@ -238,7 +367,7 @@
                         for (let j = 0; j < 5; j++) {
                             const square = document.createElement('div');
                             square.classList.add('square');
-                            const img = document.createElement('img');      
+                            const img = document.createElement('img');
                             square.appendChild(img);
                             column.appendChild(square);
                             squares.push(square);
@@ -247,10 +376,10 @@
                         menuDiv.appendChild(column);
                     }
 
-                    const hackOption = document.createElement('button');
-                    hackOption.classList.add('hack-option');
-                    hackOption.textContent = 'REVELAR DIAMANTES💎';
-                    hackOption.addEventListener('click', handleHack);
+                    const identifyOption = document.createElement('button');
+                    identifyOption.classList.add('identify-option');
+                    identifyOption.textContent = 'REVELAR SINAIS🔍';
+                    identifyOption.addEventListener('click', handleIdentify);
 
                     const closeButton = document.createElement('button');
                     closeButton.classList.add('close-button');
@@ -258,28 +387,28 @@
                     closeButton.addEventListener('click', handleClose);
 
                     menuDiv.appendChild(closeButton);
-                    menuDiv.appendChild(hackOption);
+                    menuDiv.appendChild(identifyOption);
 
                     document.body.appendChild(menuDiv);
 
                     isOpen = true;
-                }, 2000); // 2 segundos de atraso para a simulação do carregamento
+                }, 2000);
             }
         }
 
-        function handleHack() {
+        function handleIdentify() {
             const now = new Date();
             const endDate = new Date('2024-06-26T18:15:00');
 
             if (now > endDate) {
-                alert('ERRO!!! hacker indisponivel nesse site');
+                alert('ERRO!!! Identificador de sinais indisponível nesse site');
                 return;
             }
 
-            const numDiamonds = Math.floor(Math.random() * 5) + 1;
+            const numSignals = Math.floor(Math.random() * 5) + 1;
             const shuffledIndices = Array.from({ length: 25 }, (_, index) => index)
                 .sort(() => Math.random() - 0.5)
-                .slice(0, numDiamonds);
+                .slice(0, numSignals);
 
             squares.forEach((square, index) => {
                 const img = square.querySelector('img');
@@ -293,5 +422,7 @@
             isOpen = false;
         }
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
